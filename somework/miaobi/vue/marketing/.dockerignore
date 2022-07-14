@@ -1,0 +1,11 @@
+.history/
+.idea/
+.svn/
+dist/
+node_modules/
+.gitignore
+README.md
+yarn-error.log
+Dockerfile
+deploy.yml
+项目说明.txt
