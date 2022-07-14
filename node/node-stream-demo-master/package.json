@@ -1,0 +1,25 @@
+{
+  "name": "node-stream-demo",
+  "version": "1.0.0",
+  "description": "Nodejs的流学习以及应用demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "linguang",
+  "license": "MIT",
+  "dependencies": {
+    "ali-oss": "^4.10.1",
+    "co": "^4.6.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "split2": "^2.1.1",
+    "through2": "^2.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linxiaowu66/node-stream-demo.git"
+  },
+  "homepage": "https://github.com/linxiaowu66/node-stream-demo/blob/master/README.md"
+}
