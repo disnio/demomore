@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  left: 300px;
+  top: 300px;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  background: url(http://www.w3cplus.com/sites/default/files/blogs/2013/1311/bg.jpg)
+    repeat center center;
+  perspective: 1200px;
+}
+
+.container {
+  transform-style: preserve-3d;
+}
+
+img {
+  width: 340px;
+  height: 300px;
+}
+.container img {
+  transform: rotateX(60deg) scale3d(1, 1, 10);
+}

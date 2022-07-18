@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" />
+    <title>js-test</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <style lang="">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .box {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        left: 300px;
+        top: 300px;
+        border: 1px solid black;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      .cube {
+        width: 100px;
+        height: 100px;
+        transform-style: preserve-3d;
+        transform-origin: 50px 50px;
+        transform: rotateX(-33.5deg) rotateY(45deg);
+      }
+      li {
+        list-style: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background: rgba(141, 214, 249);
+        border: 1px solid #fff;
+        text-align: center;
+      }
+      .top {
+        transform: rotateX(90deg) translateZ(50px);
+      }
+      .bottom {
+        transform: rotateX(-90deg) translateZ(50px);
+      }
+      .front {
+        transform: translateZ(50px);
+      }
+      .back {
+        transform: rotateX(-180deg) translateZ(50px);
+      }
+      .left {
+        transform: rotateY(-90deg) translateZ(50px);
+      }
+      .right {
+        transform: rotateY(90deg) translateZ(50px);
+      }
+
+      .cir {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        transform-style: preserve-3d;
+        transform-origin: 50px 50px;
+        transform: rotateX(60deg) rotateY(0deg);
+      }
+
+      .cir img {
+        width: 300px;
+        height: 300px;
+      }
+
+      @keyframes rotateBox {
+        from {
+          transform: rotate3d(0, 0, 0, 0);
+          visibility: visible;
+        }
+
+        to {
+          transform: rotate3d(0, 0, 1, 365deg);
+        }
+      }
+
+      .rotateBox {
+        animation: 3s linear running infinite rotateBox;
+      }
+    </style>
+    <script src="./libs/lib.js"></script>
+    <script src="js/test.js"></script>
+  </head>
+  <body>
+    <div class="box">
+      <ul class="cube">
+        <li class="top">top</li>
+        <li class="bottom">bottom</li>
+        <li class="front">front</li>
+        <li class="back">back</li>
+        <li class="right">right</li>
+        <li class="left">left</li>
+      </ul>
+
+      <div class="cir">
+        <img src="css/ban-circle.png" class="rotateBox" />
+      </div>
+    </div>
+  </body>
+</html>

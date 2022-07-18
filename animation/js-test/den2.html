@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3D旋转</title>
+    <script src="./libs/lib.js"></script>
+    <script src="./libs/anime.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        touch-action: none;
+      }
+
+      body {
+        overflow: hidden;
+        display: flex;
+        background: #111;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+      }
+
+      #container,
+      #spin-container {
+        position: relative;
+        display: flex;
+        width: 120px;
+        height: 170px;
+        margin: auto;
+        transform-style: preserve-3d;
+        transform: rotateX(-10deg);
+      }
+
+      #container img {
+        transform-style: preserve-3d;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        line-height: 200px;
+        font-size: 50px;
+        text-align: center;
+        box-shadow: 0 0 8px #fff;
+        -webkit-box-reflect: below 10px
+          linear-gradient(transparent, transparent, rgba(232, 13, 13, 0.333));
+      }
+
+      #container img:hover {
+        box-shadow: 0 0 15px #fffd;
+        -webkit-box-reflect: below 10px
+          linear-gradient(transparent, transparent, #0007);
+      }
+
+      #container p {
+        font-family: Serif;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotateX(90deg);
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="spin-container">
+        <!-- Add your images (or video) here -->
+        <img
+          src="https://images.pexels.com/photos/206395/pexels-photo-206395.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt=""
+        />
+        <img
+          src="https://images.pexels.com/photos/1391498/pexels-photo-1391498.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt=""
+        />
+        <img
+          src="https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt=""
+        />
+        <img
+          src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt=""
+        />
+        <img
+          src="https://images.pexels.com/photos/1382734/pexels-photo-1382734.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt=""
+        />
+        <img
+          src="https://images.pexels.com/photos/1462636/pexels-photo-1462636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt=""
+        />
+        <!-- Text at center of ground -->
+        <p>3D Tiktok Carousel</p>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        var radius = 240;
+        var rotateSpeed = -60; // unit: seconds/360 degrees
+
+        var ospin = $('#spin-container');
+        var aEle = $('img', ospin);
+        const len = aEle.length;
+        const per = 360 / len;
+
+        function init() {
+          aEle.each((i, v) => {
+            $(v).css({
+              transform: `rotateY(${
+                i * (360 / aEle.length)
+              }deg) translateZ(${radius}px)`,
+            });
+          });
+        }
+
+        init();
+        let cir = 0;
+        const arr = [0, 60];
+
+        const t1 = anime.timeline({
+          targets: ospin.get(0),
+          autoplay: false,
+          delay: 0,
+          easing: 'linear',
+          duration: 1000,
+          loop: true,
+        });
+
+        _.range(0, len + 1).forEach((v, i) => {
+          t1.add(
+            {
+              rotateY: 60 * i,
+            },
+            '+=1000'
+          );
+        });
+
+        t1.play();
+
+        $('#container img').hover(
+          (e, a) => {
+            console.log('hover', e, a);
+            t1.pause();
+          },
+          () => {
+            t1.play();
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
