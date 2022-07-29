@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>filter</title>
+    <script src="./libs/lib.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div>
+      <svg width="700" height="150" xmlns="http://www.w3.org/2000/svg">
+        <!-- 点光源 -->
+        <text text-anchor="middle" x="170" y="22">fePointLight 点光源</text>
+        <filter id="lightMe1">
+          <feDiffuseLighting
+            in="SourceGraphic"
+            result="light"
+            lighting-color="white"
+          >
+            <fePointLight x="150" y="60" z="20" />
+          </feDiffuseLighting>
+          <feComposite
+            in="SourceGraphic"
+            in2="light"
+            operator="arithmetic"
+            k1="1"
+            k2="0"
+            k3="0"
+            k4="0"
+          />
+        </filter>
+        <circle cx="170" cy="80" r="50" fill="green" filter="url(#lightMe1)" />
+        <!-- 平行光 -->
+        <text text-anchor="middle" x="380" y="22">feDistantLight 平行光</text>
+        <filter id="lightMe2">
+          <feDiffuseLighting
+            in="SourceGraphic"
+            result="light"
+            lighting-color="white"
+          >
+            <feDistantLight azimuth="240" elevation="20" />
+          </feDiffuseLighting>
+          <feComposite
+            in="SourceGraphic"
+            in2="light"
+            operator="arithmetic"
+            k1="1"
+            k2="0"
+            k3="0"
+            k4="0"
+          />
+        </filter>
+        <circle cx="380" cy="80" r="50" fill="green" filter="url(#lightMe2)" />
+        <!-- 聚光灯 -->
+        <text text-anchor="middle" x="590" y="22">feSpotLight 聚光灯</text>
+        <filter id="lightMe3">
+          <feDiffuseLighting
+            in="SourceGraphic"
+            result="light"
+            lighting-color="white"
+          >
+            <feSpotLight
+              x="560"
+              y="5"
+              z="30"
+              limitingConeAngle="20"
+              pointsAtX="590"
+              pointsAtY="80"
+              pointsAtZ="0"
+            />
+          </feDiffuseLighting>
+          <feComposite
+            in="SourceGraphic"
+            in2="light"
+            operator="arithmetic"
+            k1="1"
+            k2="0"
+            k3="0"
+            k4="0"
+          />
+        </filter>
+        <circle cx="590" cy="80" r="50" fill="green" filter="url(#lightMe3)" />
+      </svg>
+    </div>
+
+    <!-- 点光源 -->
+    <div>
+      <svg width="700" height="150" xmlns="http://www.w3.org/2000/svg">
+        <filter id="diffuseLighting1" x="0%" y="0%" width="100%" height="100%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.04"
+            result="noise"
+            numOctaves="5"
+          />
+          <feDiffuseLighting
+            in="noise"
+            lighting-color="white"
+            surfaceScale="1"
+            diffuseConstant="1"
+          >
+            <fePointLight x="125" y="75" z="20" />
+          </feDiffuseLighting>
+        </filter>
+        <filter id="diffuseLighting2">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.04"
+            result="noise"
+            numOctaves="5"
+          />
+          <feDiffuseLighting
+            in="noise"
+            lighting-color="white"
+            surfaceScale="1"
+            diffuseConstant="1"
+          >
+            <fePointLight x="375" y="75" z="20" />
+          </feDiffuseLighting>
+        </filter>
+        <rect
+          x="50"
+          y="0"
+          style="width: 150px; height: 150px; filter: url(#diffuseLighting1)"
+        />
+        <rect
+          x="300"
+          y="0"
+          style="width: 150px; height: 150px; filter: url(#diffuseLighting2)"
+        />
+      </svg>
+    </div>
+
+    <div title="平行光">
+      <svg width="700" height="250" xmlns="http://www.w3.org/2000/svg">
+        <filter id="distantLight1">
+          <feDiffuseLighting>
+            <feDistantLight azimuth="0" />
+          </feDiffuseLighting>
+        </filter>
+        <filter id="distantLight2">
+          <feDiffuseLighting>
+            <feDistantLight azimuth="90" elevation="30" />
+          </feDiffuseLighting>
+        </filter>
+        <circle cx="100" cy="100" r="80" style="filter: url(#distantLight1)" />
+        <circle cx="300" cy="100" r="80" style="filter: url(#distantLight2)" />
+      </svg>
+    </div>
+
+    <div title="聚光灯">
+      <svg width="600" height="200" xmlns="http://www.w3.org/2000/svg">
+        <filter id="lighting1">
+          <feDiffuseLighting in="SourceGraphic">
+            <feSpotLight
+              x="150"
+              y="150"
+              z="50"
+              pointsAtX="100"
+              pointsAtY="50"
+              pointsAtZ="100"
+              specularExponent="1"
+              limitingConeAngle="45"
+            />
+          </feDiffuseLighting>
+        </filter>
+        <filter id="lighting2">
+          <feDiffuseLighting in="SourceGraphic">
+            <feSpotLight
+              x="150"
+              y="150"
+              z="50"
+              pointsAtX="100"
+              pointsAtY="50"
+              pointsAtZ="0"
+              specularExponent="5"
+              limitingConeAngle="25"
+            />
+          </feDiffuseLighting>
+        </filter>
+        <rect
+          x="0"
+          y="0"
+          width="200"
+          height="200"
+          style="filter: url(#lighting1)"
+        />
+        <rect
+          x="0"
+          y="0"
+          width="200"
+          height="200"
+          style="filter: url(#lighting2); transform: translateX(250px)"
+        />
+      </svg>
+    </div>
+
+    <script>
+      $(function () {});
+    </script>
+  </body>
+</html>

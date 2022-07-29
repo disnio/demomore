@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>filter</title>
+    <script src="./libs/lib.js"></script>
+    <style>
+      body {
+        background: linear-gradient(-35deg, #2aa4d5, #030633);
+        min-height: 100vh;
+      }
+      div {
+        width: 370px;
+        height: 500px;
+        overflow: hidden;
+        box-shadow: 0 0 150px #031f40;
+        margin: 1em auto;
+        margin: calc(50vh - 250px) auto;
+      }
+      svg {
+        background: #031f40;
+        position: relative;
+        left: -20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <svg width="400" height="500" viewBox="0 0 600 750">
+        <filter id="displacementFilter">
+          <feTurbulence
+            type="turbulence"
+            baseFrequency="0.01 .1"
+            numOctaves="1"
+            result="turbulence"
+            seed="53"
+          />
+          <feDisplacementMap
+            in2="turbulence"
+            in="SourceGraphic"
+            scale="50"
+            xChannelSelector="R"
+            yChannelSelector="B"
+          />
+        </filter>
+        <image
+          id="blueMoon"
+          xlink:href="img/moon.jpg"
+          width="600"
+          height="400"
+        ></image>
+        <use
+          xlink:href="#blueMoon"
+          x="-10"
+          transform="translate(0, 800) scale(1 -1) "
+          filter="url(#displacementFilter)"
+        />
+      </svg>
+    </div>
+    <script>
+      $(function () {
+        var img = document.querySelector('#displacementFilter feTurbulence');
+        var frames = 0;
+        var rad = Math.PI / 180;
+
+        function AnimateBaseFrequency() {
+          // 水平和垂直的噪点频率比是1:10，因此，会有类似水平拉伸的效果
+          var bf = '0.01 .1';
+          bfx = Number(bf.split(' ')[0]);
+          bfy = Number(bf.split(' ')[1]);
+          frames += 0.5;
+          bfx += 0.001 * Math.cos(frames * rad);
+          bfy += 0.005 * Math.sin(frames * rad);
+
+          bf = bfx.toString() + ' ' + bfy.toString();
+          img.setAttributeNS(null, 'baseFrequency', bf);
+
+          window.requestAnimationFrame(AnimateBaseFrequency);
+        }
+
+        window.requestAnimationFrame(AnimateBaseFrequency);
+      });
+    </script>
+  </body>
+</html>

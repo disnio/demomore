@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>filter</title>
+    <script src="./libs/lib.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div title="阴影">
+      <svg width="200" height="200">
+
+        <defs>
+            <filter
+                id="drop_shadow"
+                filterUnits="objectBoundingBox"
+                 x="-100%" y="-100%" width="250%"
+                height="250%">
+
+                <feDropShadow in="SourceGraphic"
+                    dx="0" dy="0" stdDeviation="50"
+                    flood-color="darkgreen" />
+            </filter>
+        </defs>
+
+        <rect x="50" y="50" width="100" height="100"
+            style="stroke:#000000;
+                fill:lightgreen;
+                filter:url(#drop_shadow);" />
+
+        <!-- <rect x="40" y="40" width="100" height="100"
+            style="stroke:#000000;
+                fill:lightgreen;
+                filter:url(#drop_shadow);" /> -->
+
+        <g fill="#FFFFFF" stroke="black"
+            font-size="10" font-family="Verdana">
+            <text x="50" y="90">GeeksForGeeks</text>
+    </svg>
+    </div>
+
+    <script>
+      $(function () {});
+    </script>
+  </body>
+</html>
